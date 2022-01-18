@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /* background-color: #282c34; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.interface {
+  display: flex;
+}
+
+.img-container {
+  background-color: #90afee;
+  position: relative;
+  height: 400px;
+  width: 400px;
+  border: 1px solid rgb(0, 0, 0) !important;
+}
+
+.img-container img,
+.img-container svg{
+  position: absolute;
+  left: 0;
+}
+
+.control-container {
+  background-color: #76a1f7;
+  flex: 1 1 auto;
 }
