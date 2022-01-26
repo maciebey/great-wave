@@ -1,12 +1,7 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 
 import { useState, useEffect } from 'react';
-
-import one from './1.png';
-import two from './2.png';
-import three from './3.png';
 
 /*
 https://stackoverflow.com/questions/55987953/how-do-i-update-states-onchange-in-an-array-of-object-in-react-hooks
@@ -21,7 +16,6 @@ const iconPath = process.env.PUBLIC_URL + '/assets/';
 interface layer {
   name: string,
   file: string,
-  image: any,
   opacity: number,
   color: string
 }
@@ -31,6 +25,7 @@ type Props = {
   onChange?: any
   // children: JSX.Element,
 };
+
 const SettingComponent = ({ layer, onChange }: Props) => {
   const opacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //console.log(event.target.value)
@@ -100,21 +95,18 @@ function App(this: any) {
         {
           "name": "one",
           "file": "1.png",
-          "image": one,
           "opacity": 1,
           "color": "#6166fb"
         },
         {
           "name": "two",
           "file": "2.png",
-          "image": two,
           "opacity": 1,
           "color": "#fb6161"
         },
         {
           "name": "three",
           "file": "3.png",
-          "image": three,
           "opacity": 1,
           "color": "#3cda4e"
         }
@@ -133,8 +125,8 @@ function App(this: any) {
     <div className="App">
       <div className="interface">
         <div className="img-container">
-          {images.length && images.map((i) => (
-            <SvgComponent layer={i} />
+          {images.length && images.map((i, index) => (
+            <SvgComponent layer={i} key={index} />
           ))}
           {/* {images.length && images.map((i) => (
             <img key={i.name} alt={i.name} src={`${iconPath}${i.file}`} style={{opacity: i.opacity}} />
@@ -144,6 +136,7 @@ function App(this: any) {
           {images.length && images.map((i, index) => (
             <SettingComponent
               layer={i}
+              key={index}
               onChange={(layer:layer) => handleChange(layer, index)}
             />
           ))}
