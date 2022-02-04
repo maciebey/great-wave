@@ -1,0 +1,22 @@
+.opacity-control {
+    display: flex;
+}
+
+.opacity-control p{
+    padding-right: 10px;
+    margin: 0;
+}
+
+.color-control {
+    display: flex;
+}
+
+.color-control p{
+    padding-right: 10px;
+    margin: 0;
+}
+
+.color-display {
+    width: 20px;
+    height: 20px;
+}
