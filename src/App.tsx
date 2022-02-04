@@ -55,7 +55,7 @@ function App(this: any) {
   return (
     <div className="App">
       <Header></Header>
-      <div className="interface">
+      <main>
         <div className="img-container">
           {images.length && images.map((i, index) => (
             <SvgComponent layer={i} key={index} />
@@ -73,7 +73,7 @@ function App(this: any) {
             />
           ))}
         </div>
-      </div>
+      </main>
       <Footer></Footer>
     </div>
   );

@@ -5,17 +5,20 @@
   flex-direction: column;
 }
 
-.interface {
-  display: flex;
+main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .img-container {
-  background-color: #90afee;
+  background-color: #f7f3f3;
   position: relative;
   height: 400px;
   width: 400px;
   border: 1px solid rgb(0, 0, 0) !important;
+  margin: 15px auto;
 }
 
 .img-container img,
@@ -27,5 +30,8 @@
 .control-container {
   text-align: center;
   background-color: #76a1f7;
-  flex: 1 1 auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 10px 5px 5px #c6c6c6;
+  margin-bottom: 20px;
 }
