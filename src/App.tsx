@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Footer, SvgComponent, SettingComponent } from './component';
+import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
 import { layer } from './interfaces';
 import * as htmlToImage from 'html-to-image';
 import './App.css';
@@ -19,10 +19,10 @@ function App(this: any) {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const [modalDisplayClass, setModalDisplayClass] = useState('hide');
+  const [canvas, setCanvas] = useState<HTMLCanvasElement>();
+  const [modalDisplay, setModalDisplay] = useState(false);
 
-  let canvasRef: HTMLElement;
-  let renderRef: HTMLElement;
+  let canvasRef: HTMLElement | null = null;
 
   useEffect(() => {
     // will only load data once on page load
@@ -58,51 +58,15 @@ function App(this: any) {
     setImages(newData);
   };
 
-  const closeModal = () => {
-    setModalDisplayClass('hide');
-  }
-
-  /* html-to-image guide
-  * https://betterprogramming.pub/heres-why-i-m-replacing-html2canvas-with-html-to-image-in-our-react-app-d8da0b85eadf
-  */
   const captureCanvas = () => {
-    if (canvasRef && renderRef) {
-      htmlToImage.toCanvas(canvasRef).then(function(canvas) {
-        renderRef.replaceChildren(canvas);
+    if (canvasRef) {
+      htmlToImage.toCanvas(canvasRef).then(function(c) {
+        setCanvas(c)
+        setModalDisplay(true);
       });
     }
-    setModalDisplayClass('');
-    
   };
 
-  const saveCanvas = () => {
-    if (canvasRef) {
-      htmlToImage.toPng(canvasRef).then(function (dataUrl) {
-        saveAs(dataUrl, 'my-node.png');
-      });
-    }
-  }
-
-  const saveAs = (blob: any, fileName: any) =>{
-    var elem = window.document.createElement('a');
-    elem.href = blob
-    elem.download = fileName;
-    // elem.style = 'display:none;';
-    (document.body || document.documentElement).appendChild(elem);
-    if (typeof elem.click === 'function') {
-      elem.click();
-    } else {
-      elem.target = '_blank';
-      elem.dispatchEvent(new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-      }));
-    }
-    URL.revokeObjectURL(elem.href);
-    elem.remove()
-  }
-  
   return (
     <div className="App">
       <Header></Header>
@@ -129,13 +93,10 @@ function App(this: any) {
         <div onClick={captureCanvas} className="capture-button button">Capture</div>
       </main>
       <Footer></Footer>
-      <div className={'modal ' + modalDisplayClass}>
-        <div className='modal-content'>
-          <div onClick={closeModal} className="close-button button">X</div>
-          <div ref={node => {if (node) renderRef = node}} id="append"></div>
-          <div onClick={saveCanvas} className="save-button button">Save As Png</div>
-        </div>
-      </div>
+      <Modal
+        canvas={canvas}
+        modalDisplay={modalDisplay}
+        setModalDisplay={setModalDisplay} />
     </div>
   );
 }
