@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/great-wave/static/css/main.75b78e85.chunk.css",
+    "main.js": "/great-wave/static/js/main.fdd5ba75.chunk.js",
+    "main.js.map": "/great-wave/static/js/main.fdd5ba75.chunk.js.map",
+    "runtime-main.js": "/great-wave/static/js/runtime-main.9e61b1e6.js",
+    "runtime-main.js.map": "/great-wave/static/js/runtime-main.9e61b1e6.js.map",
+    "static/js/2.59ee5779.chunk.js": "/great-wave/static/js/2.59ee5779.chunk.js",
+    "static/js/2.59ee5779.chunk.js.map": "/great-wave/static/js/2.59ee5779.chunk.js.map",
+    "static/js/3.818dbddd.chunk.js": "/great-wave/static/js/3.818dbddd.chunk.js",
+    "static/js/3.818dbddd.chunk.js.map": "/great-wave/static/js/3.818dbddd.chunk.js.map",
+    "index.html": "/great-wave/index.html",
+    "static/css/main.75b78e85.chunk.css.map": "/great-wave/static/css/main.75b78e85.chunk.css.map",
+    "static/js/2.59ee5779.chunk.js.LICENSE.txt": "/great-wave/static/js/2.59ee5779.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9e61b1e6.js",
+    "static/js/2.59ee5779.chunk.js",
+    "static/css/main.75b78e85.chunk.css",
+    "static/js/main.fdd5ba75.chunk.js"
+  ]
+}
