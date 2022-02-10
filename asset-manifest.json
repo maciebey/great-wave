@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/great-wave/static/css/main.728bd2d0.chunk.css",
-    "main.js": "/great-wave/static/js/main.1e474d87.chunk.js",
-    "main.js.map": "/great-wave/static/js/main.1e474d87.chunk.js.map",
+    "main.css": "/great-wave/static/css/main.8c902ec0.chunk.css",
+    "main.js": "/great-wave/static/js/main.6594fd64.chunk.js",
+    "main.js.map": "/great-wave/static/js/main.6594fd64.chunk.js.map",
     "runtime-main.js": "/great-wave/static/js/runtime-main.ceacb19f.js",
     "runtime-main.js.map": "/great-wave/static/js/runtime-main.ceacb19f.js.map",
-    "static/js/2.0f4e3ca2.chunk.js": "/great-wave/static/js/2.0f4e3ca2.chunk.js",
-    "static/js/2.0f4e3ca2.chunk.js.map": "/great-wave/static/js/2.0f4e3ca2.chunk.js.map",
+    "static/js/2.d08baf7f.chunk.js": "/great-wave/static/js/2.d08baf7f.chunk.js",
+    "static/js/2.d08baf7f.chunk.js.map": "/great-wave/static/js/2.d08baf7f.chunk.js.map",
     "static/js/3.9aae98b0.chunk.js": "/great-wave/static/js/3.9aae98b0.chunk.js",
     "static/js/3.9aae98b0.chunk.js.map": "/great-wave/static/js/3.9aae98b0.chunk.js.map",
     "index.html": "/great-wave/index.html",
-    "static/css/main.728bd2d0.chunk.css.map": "/great-wave/static/css/main.728bd2d0.chunk.css.map",
-    "static/js/2.0f4e3ca2.chunk.js.LICENSE.txt": "/great-wave/static/js/2.0f4e3ca2.chunk.js.LICENSE.txt"
+    "static/css/main.8c902ec0.chunk.css.map": "/great-wave/static/css/main.8c902ec0.chunk.css.map",
+    "static/js/2.d08baf7f.chunk.js.LICENSE.txt": "/great-wave/static/js/2.d08baf7f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ceacb19f.js",
-    "static/js/2.0f4e3ca2.chunk.js",
-    "static/css/main.728bd2d0.chunk.css",
-    "static/js/main.1e474d87.chunk.js"
+    "static/js/2.d08baf7f.chunk.js",
+    "static/css/main.8c902ec0.chunk.css",
+    "static/js/main.6594fd64.chunk.js"
   ]
 }
