@@ -1,6 +1,7 @@
 import React from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
 import { layer } from './interfaces';
+import { WaveImageData } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
@@ -28,27 +29,7 @@ function App(this: any) {
     // will only load data once on page load
     if (isLoading === true) {
       setIsLoading(false);
-      const data: layer[] = [
-        {
-          "name": "one",
-          "file": "1.png",
-          "opacity": 1,
-          "color": "#6166fb"
-        },
-        {
-          "name": "two",
-          "file": "2.png",
-          "opacity": 1,
-          "color": "#fb6161"
-        },
-        {
-          "name": "three",
-          "file": "3.png",
-          "opacity": 1,
-          "color": "#3cda4e"
-        }
-      ]
-      setImages(data)
+      setImages(WaveImageData[1])
     }
   }, [isLoading]);
   
