@@ -60,7 +60,7 @@ function App(this: any) {
 
   const captureCanvas = () => {
     if (canvasRef) {
-      htmlToImage.toCanvas(canvasRef).then(function(c) {
+      htmlToImage.toCanvas(canvasRef, {backgroundColor: "transparent"}).then(function(c) {
         setCanvas(c)
         setModalDisplay(true);
       });
@@ -90,7 +90,7 @@ function App(this: any) {
             />
           ))}
         </div>
-        <div onClick={captureCanvas} className="capture-button button">Capture</div>
+        <button onClick={captureCanvas} className="capture-button button">Capture</button>
       </main>
       <Footer></Footer>
       <Modal

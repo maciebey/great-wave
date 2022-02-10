@@ -47,11 +47,11 @@ main {
 .button {
   background-color: #c6c6c6;
   display: inline;
-  color: #fff;
+  color: #000;
   padding: 5px;
   border-radius: 5px;
 }
 
-.close-button {
-  float: right;
+.button:not(:last-of-type) {
+  margin-right: 5px;
 }

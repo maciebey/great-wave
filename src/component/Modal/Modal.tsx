@@ -21,12 +21,29 @@ function Modal({ canvas, modalDisplay, setModalDisplay }: Props) {
     }
   });
 
-  const saveCanvas = () => {
-      htmlToImage.toPng(canvas as HTMLElement).then(function (dataUrl) {
-        saveAs(dataUrl, 'my-node.png');
-      });
+  const saveCanvas = (fileType: string) => {
+    // return if canvas not set correctly
+    if (!canvas) return;
+
+    let promise: Promise<string>;
+    switch (fileType) {
+      case "png":
+        promise = htmlToImage.toPng(canvas);
+        break;
+      case "jpeg":
+        promise = htmlToImage.toJpeg(canvas);
+        break;
+      default:
+        // can't proceed without promise set, so just return
+        return;
+    }
+    promise.then((dataUrl) => {
+      // TODO: file naming
+      saveAs(dataUrl, `my-node.${fileType}`);
+    })
   }
 
+  // taken from example in top comment, maybe simplify
   const saveAs = (blob: any, fileName: any) =>{
     var elem = window.document.createElement('a');
     elem.href = blob
@@ -64,9 +81,17 @@ function Modal({ canvas, modalDisplay, setModalDisplay }: Props) {
   return (
     <div className={'modal ' + (modalDisplay ? '' : 'hide')} onClick={outside}>
       <div className='modal-content' onClick={inside}>
-        <div onClick={closeModal} className="close-button button">X</div>
-        <div ref={node => { if (node) renderRef = node }} id="append"></div>
-        <div onClick={saveCanvas} className="save-button button">Save As Png</div>
+        <div className='modal-header'>
+          <h2>Your New Print!</h2>
+          <button onClick={closeModal} className="close-button button">X</button>
+        </div>
+        <div className='modal-body'>
+          <div ref={node => { if (node) renderRef = node }} id="modal-canvas"></div>
+        </div>
+        <div className='modal-footer'>
+          <button onClick={() => saveCanvas("png")} className="save-button button">Save As Png</button>
+          <button onClick={() => saveCanvas("jpeg")} className="save-button button">Save As Jpeg</button>
+        </div>
       </div>
     </div>
   );
