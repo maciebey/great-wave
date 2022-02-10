@@ -21,10 +21,6 @@ function Modal({ canvas, modalDisplay, setModalDisplay }: Props) {
     }
   });
 
-  const closeModal = () => {
-    setModalDisplay(false);
-  }
-
   const saveCanvas = () => {
       htmlToImage.toPng(canvas as HTMLElement).then(function (dataUrl) {
         saveAs(dataUrl, 'my-node.png');
@@ -51,9 +47,23 @@ function Modal({ canvas, modalDisplay, setModalDisplay }: Props) {
     elem.remove()
   }
 
+  // used with outside area is clicked or close button
+  const closeModal = () => {
+    setModalDisplay(false);
+  }
+
+  const outside = () => {
+    closeModal();
+  }
+
+  // just stop propigation of event, clicks inside modal must hit close button
+  const inside = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation()
+  }
+
   return (
-    <div className={'modal ' + (modalDisplay ? '' : 'hide')}>
-      <div className='modal-content'>
+    <div className={'modal ' + (modalDisplay ? '' : 'hide')} onClick={outside}>
+      <div className='modal-content' onClick={inside}>
         <div onClick={closeModal} className="close-button button">X</div>
         <div ref={node => { if (node) renderRef = node }} id="append"></div>
         <div onClick={saveCanvas} className="save-button button">Save As Png</div>
