@@ -4,3 +4,9 @@ export interface layer {
     opacity: number,
     color: string
 };
+
+export interface ChangeObject {
+    type: string,
+    layer?: layer,
+    direction?: string
+}

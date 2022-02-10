@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
-import { layer } from './interfaces';
+import { layer, ChangeObject } from './interfaces';
 import { WaveImageData } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
@@ -33,10 +33,22 @@ function App(this: any) {
     }
   }, [isLoading]);
   
-  const handleChange = (layer: layer, index: number) => {
-    const newData: layer[] = [...images]
-    newData[index] = layer;
-    setImages(newData);
+  const handleChange = (changeObject: ChangeObject, index: number) => {
+    // color/opacity
+    if (changeObject.type === "layer") {
+      const newData: layer[] = [...images];
+      newData[index] = changeObject.layer!;
+      setImages(newData);
+    }
+    // position
+    else {
+      const swapIndex = (changeObject.direction === "up") ? (index - 1) : (index + 1)
+      const newData: layer[] = [...images];
+      const temp = newData[index];
+      newData[index] = newData[swapIndex];
+      newData[swapIndex] = temp;
+      setImages(newData);
+    }
   };
 
   const captureCanvas = () => {
@@ -67,7 +79,9 @@ function App(this: any) {
             <SettingComponent
               layer={i}
               key={index}
-              onChange={(layer:layer) => handleChange(layer, index)}
+              imagePosition={index}
+              imageArrayLength={images.length}
+              onChange={(changeObject:ChangeObject) => handleChange(changeObject, index)}
             />
           ))}
         </div>

@@ -1,27 +1,37 @@
-import { layer } from '../../interfaces';
+import { layer, ChangeObject } from '../../interfaces';
 import './SettingComponent.css';
 
 type Props = {
   layer: layer,
+  imagePosition: number,
+  imageArrayLength: number,
   onChange?: any
-  // children: JSX.Element,
 };
 
-const SettingComponent = ({ layer, onChange }: Props) => {
+const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: Props) => {
+
   const opacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //console.log(event.target.value)
-    layer.opacity = Number(event.target.value)
-    onChange(layer)
+    const change: ChangeObject = {type: "layer", layer:layer}
+    change.layer!.opacity = Number(event.target.value)
+    onChange(change)
   };
   const colorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    //console.log(event.target.value)
-    layer.color = event.target.value
-    onChange(layer)
+    const change: ChangeObject = {type: "layer", layer:layer}
+    change.layer!.color = event.target.value
+    onChange(change)
   };
+  const positionChange = (direction: string) => {
+    const change: ChangeObject = {type: "position", direction:direction}
+    onChange(change)
+  }
 
   return (
-    <div>
-      <div>Layer: {layer.name}</div>
+    <div className='control-main'>
+      <div className='control-header'>
+        <div>Layer: {layer.name}</div>
+        <button onClick={() => positionChange("up")} className="button" disabled={imagePosition === 0}>↑</button>
+        <button onClick={() => positionChange("down")} className="button" disabled={imagePosition === imageArrayLength - 1}>↓</button>
+      </div>
       <div className='opacity-control'>
         <p>Opacity: {layer.opacity} </p>
         <input
