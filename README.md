@@ -7,12 +7,11 @@ Live on Github Pages: https://maciebey.github.io/great-wave/
 Tech: React, Typescript
 
 This project is currently in a working proof of concept state. Current features:
-- Independently modify image layers (opacity/color)
-- Flatten and export as PNG file
+- Independently modify image layers (opacity/color picker/layer order)
+- Flatten and export as PNG/JPG file
 - Live App (currently GitHub Pages)
 
 Planned features (ordered from most to least priority):
-- Real Color Picker
 - Replace POC images with initial set
 - Undo/Redo of changes
 - Additional manipulation settings
@@ -20,6 +19,7 @@ Planned features (ordered from most to least priority):
 - Locally cache user selections, restore on reload
 - Locally save versions, restore and switch
 - STRETCH: export to 3rd party print service
+- Replace or implement new color picker
 
 
 
