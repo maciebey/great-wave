@@ -34,3 +34,16 @@
     width: 20px;
     height: 20px;
 }
+
+.picker-popover {
+    position: 'absolute';
+    z-index: 2;
+}
+
+.picker-cover {
+    position: 'fixed';
+    top: '0px';
+    right: '0px';
+    bottom: '0px';
+    left: '0px';
+}

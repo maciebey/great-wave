@@ -1,5 +1,37 @@
+import { useState } from 'react';
 import { layer, ChangeObject } from '../../interfaces';
+import { ChromePicker } from 'react-color';
 import './SettingComponent.css';
+
+type PickerProps = {
+  layer: layer,
+  onChange?: any
+};
+
+// TODO: latest version of react-color bugged, replace or upgrade https://github.com/casesandberg/react-color/issues/837
+const ColorPickerButton = ({layer, onChange}:PickerProps) => {
+  const [displayPicker, setDisplayPicker] = useState(false);
+
+  const colorChange = (c: any, event: React.ChangeEvent<HTMLInputElement>) => {
+    const change: ChangeObject = {type: "layer", layer:layer}
+    change.layer!.color = c.hex
+    onChange(change)
+  };
+
+  return (
+    <div>
+      <button onClick={ () => setDisplayPicker(true) }>Pick Color</button>
+      {displayPicker && <div className='picker-popover'>
+        <div className='picker-cover' onClick={ () => setDisplayPicker(false) } />
+        <ChromePicker
+          color={layer.color}
+          onChange={ colorChange }
+          disableAlpha={true}
+        />
+      </div>}
+    </div>
+  )
+}
 
 type Props = {
   layer: layer,
@@ -15,11 +47,7 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
     change.layer!.opacity = Number(event.target.value)
     onChange(change)
   };
-  const colorChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const change: ChangeObject = {type: "layer", layer:layer}
-    change.layer!.color = event.target.value
-    onChange(change)
-  };
+
   const positionChange = (direction: string) => {
     const change: ChangeObject = {type: "position", direction:direction}
     onChange(change)
@@ -46,12 +74,10 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
       <div className='color-control'>
         <p>Color:</p>
         <div className='color-display' style={{ backgroundColor: layer.color }}></div>
-        <select value={layer.color} onChange={(event) => colorChange(event)}>
-          <option value="#6166fb">#6166fb</option>
-          <option value="#fb6161">#fb6161</option>
-          <option value="#3cda4e">#3cda4e</option>
-          <option value="#c800ff">#c800ff</option>
-        </select>
+        <ColorPickerButton
+          layer={layer}
+          onChange={(change:ChangeObject) => onChange(change)}
+        />
       </div>
     </div>
   )
