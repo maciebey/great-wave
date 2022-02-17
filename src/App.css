@@ -35,7 +35,7 @@ main {
 
 .action-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px;
 }
 

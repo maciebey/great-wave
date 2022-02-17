@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
-import { WaveImageData, layer, ChangeObject } from './config'
+import { WaveImageData, layer, ChangeObject, NamedLayerSet } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
@@ -14,10 +14,11 @@ https://stackoverflow.com/questions/57843369/react-typescript-custom-hooks-prope
 */
 
 function App(this: any) {
-  const [images, setImages] = useState<layer[]>([]);
-
+  
   const [isLoading, setIsLoading] = useState(true);
-
+  const [images, setImages] = useState<layer[]>([]);
+  const [setNames, setSetNames] = useState<string[]>();
+  const [currentSet, setCurrentSet] = useState<number>(1);
   const [canvas, setCanvas] = useState<HTMLCanvasElement>();
   const [modalDisplay, setModalDisplay] = useState(false);
 
@@ -27,6 +28,7 @@ function App(this: any) {
     // will only load data once on page load
     if (isLoading === true) {
       setIsLoading(false);
+      setSetNames(Object.values(WaveImageData).map(item => item.name));
       setImages(WaveImageData[1].layers)
     }
   }, [isLoading]);
@@ -58,6 +60,11 @@ function App(this: any) {
     }
   };
 
+  const changeSets = (newIndex: number) => {
+    setCurrentSet(newIndex)
+    setImages(WaveImageData[newIndex].layers)
+  };
+
   return (
     <div className="App">
       <Header></Header>
@@ -69,6 +76,11 @@ function App(this: any) {
             ))}
           </div>
           <div className="action-container">
+            {setNames && <select value={currentSet} onChange={(event) => changeSets(Number(event.target.value))}>
+              {setNames.map((setName, index) => (
+                <option value={index} key={setName}>{setName}</option>
+              ))}
+            </select>}
             <button onClick={captureCanvas} className="capture-button button">Capture</button>
           </div>
         </div>

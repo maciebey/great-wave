@@ -2,7 +2,7 @@ import { NamedLayerSet } from '.';
 
 const WaveImageData: NamedLayerSet[] = [
   {
-    name: "test one",
+    name: "A Beautiful Wave",
     layers: [
       {
         "name": "one",
@@ -25,7 +25,7 @@ const WaveImageData: NamedLayerSet[] = [
     ]
   },
   {
-    name: "test two",
+    name: "Slices",
     layers: [
       {
         "name": "one",
