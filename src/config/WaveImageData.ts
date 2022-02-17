@@ -2,7 +2,36 @@ import { NamedLayerSet } from '.';
 
 const WaveImageData: NamedLayerSet[] = [
   {
-    name: "A Beautiful Wave",
+    name: "The Great Wave - Hokusai",
+    layers: [
+      {
+        "name": "Water One",
+        "file": "set3/blue_light.svg",
+        "opacity": 1,
+        "color": "#c7efef"
+      },
+      {
+        "name": "Water Two",
+        "file": "set3/blue_dark.svg",
+        "opacity": 1,
+        "color": "#261a5b"
+      },
+      {
+        "name": "Water Three",
+        "file": "set3/blue_med.svg",
+        "opacity": 1,
+        "color": "#059faf"
+      },
+      {
+        "name": "Spray",
+        "file": "set3/splash.svg",
+        "opacity": 1,
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    name: "A Beautiful Test Wave",
     layers: [
       {
         "name": "one",
@@ -25,7 +54,7 @@ const WaveImageData: NamedLayerSet[] = [
     ]
   },
   {
-    name: "Slices",
+    name: "Test Slices",
     layers: [
       {
         "name": "one",

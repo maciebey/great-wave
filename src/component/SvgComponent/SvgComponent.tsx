@@ -26,7 +26,7 @@ const SvgComponent = ({ layer, onChange }: Props) => {
           <feComposite in="SourceGraphic" in2="flood" operator="arithmetic" k1="1" k2="0" k3="0" k4="0" />
         </filter>
       </defs>
-      <image width="100%" height="100%" xlinkHref={`${iconPath}${file}`} filter={`url(#${filterName})`} opacity={opacity} />
+      <image preserveAspectRatio="xMidYMax meet" width="100%" height="100%" xlinkHref={`${iconPath}${file}`} filter={`url(#${filterName})`} opacity={opacity} />
     </svg>
   )
 }

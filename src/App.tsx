@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
-import { WaveImageData, layer, ChangeObject, NamedLayerSet } from './config'
+import { WaveImageData, layer, ChangeObject } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
@@ -18,7 +18,7 @@ function App(this: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [images, setImages] = useState<layer[]>([]);
   const [setNames, setSetNames] = useState<string[]>();
-  const [currentSet, setCurrentSet] = useState<number>(1);
+  const [currentSet, setCurrentSet] = useState<number>(0);
   const [canvas, setCanvas] = useState<HTMLCanvasElement>();
   const [modalDisplay, setModalDisplay] = useState(false);
 
@@ -29,9 +29,9 @@ function App(this: any) {
     if (isLoading === true) {
       setIsLoading(false);
       setSetNames(Object.values(WaveImageData).map(item => item.name));
-      setImages(WaveImageData[1].layers)
+      setImages(WaveImageData[currentSet].layers)
     }
-  }, [isLoading]);
+  }, [isLoading, currentSet]);
   
   const handleChange = (changeObject: ChangeObject, index: number) => {
     // color/opacity
