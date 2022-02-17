@@ -1,11 +1,10 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
 import { layer, ChangeObject } from './interfaces';
 import { WaveImageData } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
-import { useState, useEffect } from 'react';
 
 /*
 https://stackoverflow.com/questions/55987953/how-do-i-update-states-onchange-in-an-array-of-object-in-react-hooks
@@ -69,9 +68,9 @@ function App(this: any) {
             {images.length && images.map((i, index) => (
               <SvgComponent layer={i} key={index} />
             ))}
-            {/* {images.length && images.map((i) => (
-              <img key={i.name} alt={i.name} src={`${iconPath}${i.file}`} style={{opacity: i.opacity}} />
-            ))} */}
+          </div>
+          <div className="action-container">
+            <button onClick={captureCanvas} className="capture-button button">Capture</button>
           </div>
         </div>
         <div className="control-container">
@@ -85,7 +84,6 @@ function App(this: any) {
             />
           ))}
         </div>
-        <button onClick={captureCanvas} className="capture-button button">Capture</button>
       </main>
       <Footer></Footer>
       <Modal

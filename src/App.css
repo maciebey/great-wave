@@ -8,8 +8,9 @@
 main {
   flex: 1 1 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 #canvas {
@@ -30,6 +31,12 @@ main {
 .img-container svg{
   position: absolute;
   left: 0;
+}
+
+.action-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
 }
 
 .control-container {
