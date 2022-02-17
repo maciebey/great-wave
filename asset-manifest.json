@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/great-wave/static/css/main.78f4d607.css",
-    "main.js": "/great-wave/static/js/main.43b1b14f.js",
-    "static/js/787.c3128830.chunk.js": "/great-wave/static/js/787.c3128830.chunk.js",
+    "main.css": "/great-wave/static/css/main.9dcf9df7.chunk.css",
+    "main.js": "/great-wave/static/js/main.fd749795.chunk.js",
+    "main.js.map": "/great-wave/static/js/main.fd749795.chunk.js.map",
+    "runtime-main.js": "/great-wave/static/js/runtime-main.aa9b9d99.js",
+    "runtime-main.js.map": "/great-wave/static/js/runtime-main.aa9b9d99.js.map",
+    "static/js/2.7c078d0e.chunk.js": "/great-wave/static/js/2.7c078d0e.chunk.js",
+    "static/js/2.7c078d0e.chunk.js.map": "/great-wave/static/js/2.7c078d0e.chunk.js.map",
+    "static/js/3.e7b6525c.chunk.js": "/great-wave/static/js/3.e7b6525c.chunk.js",
+    "static/js/3.e7b6525c.chunk.js.map": "/great-wave/static/js/3.e7b6525c.chunk.js.map",
     "index.html": "/great-wave/index.html",
-    "main.78f4d607.css.map": "/great-wave/static/css/main.78f4d607.css.map",
-    "main.43b1b14f.js.map": "/great-wave/static/js/main.43b1b14f.js.map",
-    "787.c3128830.chunk.js.map": "/great-wave/static/js/787.c3128830.chunk.js.map"
+    "static/css/main.9dcf9df7.chunk.css.map": "/great-wave/static/css/main.9dcf9df7.chunk.css.map",
+    "static/js/2.7c078d0e.chunk.js.LICENSE.txt": "/great-wave/static/js/2.7c078d0e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/css/main.78f4d607.css",
-    "static/js/main.43b1b14f.js"
+    "static/js/runtime-main.aa9b9d99.js",
+    "static/js/2.7c078d0e.chunk.js",
+    "static/css/main.9dcf9df7.chunk.css",
+    "static/js/main.fd749795.chunk.js"
   ]
 }
