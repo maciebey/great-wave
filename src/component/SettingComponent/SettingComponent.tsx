@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { layer, ChangeObject } from '../../interfaces';
+import { layer, ChangeObject } from '../../config';
 import { ChromePicker } from 'react-color';
 import './SettingComponent.css';
 

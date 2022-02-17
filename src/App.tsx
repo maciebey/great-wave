@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
-import { layer, ChangeObject } from './interfaces';
-import { WaveImageData } from './config'
+import { WaveImageData, layer, ChangeObject } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
@@ -28,7 +27,7 @@ function App(this: any) {
     // will only load data once on page load
     if (isLoading === true) {
       setIsLoading(false);
-      setImages(WaveImageData[1])
+      setImages(WaveImageData[1].layers)
     }
   }, [isLoading]);
   

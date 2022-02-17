@@ -1,4 +1,4 @@
-import { layer } from '../../interfaces';
+import { layer } from '../../config';
 import './SvgComponent.css';
 
 const iconPath = process.env.PUBLIC_URL + '/assets/';

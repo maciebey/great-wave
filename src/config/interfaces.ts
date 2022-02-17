@@ -5,6 +5,11 @@ export interface layer {
     color: string
 };
 
+export interface NamedLayerSet {
+    name: string,
+    layers: layer[]
+}
+
 export interface ChangeObject {
     type: string,
     layer?: layer,
