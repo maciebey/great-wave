@@ -11,7 +11,9 @@ This project is currently in a working proof of concept state. Current features:
 - Flatten and export as PNG/JPG file
 - Live App (currently GitHub Pages)
 
-Planned features (ordered from most to least priority):
+Planned features (roughly ordered from highest to lowest priority):
+- UI cleanup, including color changes, image/viewport sizes, responsiveness
+- Add info/about section
 - Replace POC images with initial set
 - Undo/Redo of changes
 - Additional manipulation settings
