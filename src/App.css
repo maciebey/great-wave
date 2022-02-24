@@ -35,6 +35,10 @@ main {
   aspect-ratio: 3046 / 2052;
 }
 
+.ratio-1 { aspect-ratio: 1; }
+.ratio-1920-1080 { aspect-ratio: 1920 / 1080; }
+.ratio-3046-2052 { aspect-ratio: 3046 / 2052; }
+
 .img-container img,
 .img-container svg{
   position: absolute;

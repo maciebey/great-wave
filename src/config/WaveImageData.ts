@@ -3,6 +3,7 @@ import { NamedLayerSet } from '.';
 const WaveImageData: NamedLayerSet[] = [
   {
     name: "The Great Wave - Hokusai",
+    ratioClass: "ratio-3046-2052",
     layers: [
       // {
       //   "name": "Background",
@@ -50,6 +51,7 @@ const WaveImageData: NamedLayerSet[] = [
   },
   {
     name: "Rectangle Test",
+    ratioClass: "ratio-1920-1080",
     layers: [
       {
         "name": "One",
@@ -79,6 +81,7 @@ const WaveImageData: NamedLayerSet[] = [
   },
   {
     name: "A Beautiful Test Wave",
+    ratioClass: "ratio-1",
     layers: [
       {
         "name": "one",
@@ -102,6 +105,7 @@ const WaveImageData: NamedLayerSet[] = [
   },
   {
     name: "Test Slices",
+    ratioClass: "ratio-1",
     layers: [
       {
         "name": "one",

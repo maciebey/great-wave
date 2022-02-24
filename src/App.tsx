@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
-import { WaveImageData, layer, ChangeObject } from './config'
+import { WaveImageData, layer, ChangeObject, NamedLayerSet } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
@@ -15,12 +15,16 @@ https://stackoverflow.com/questions/57843369/react-typescript-custom-hooks-prope
 
 function App(this: any) {
   
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // initial load control
+  // TODO: simplify following into single useState
+  const [namedLayerSet, setNamedLayerSet] = useState<NamedLayerSet>();
   const [images, setImages] = useState<layer[]>([]);
-  const [setNames, setSetNames] = useState<string[]>();
-  const [currentSet, setCurrentSet] = useState<number>(0);
-  const [canvas, setCanvas] = useState<HTMLCanvasElement>();
-  const [modalDisplay, setModalDisplay] = useState(false);
+  const [setNames, setSetNames] = useState<string[]>(); // used to hold all set names, used in select
+  const [currentSet, setCurrentSet] = useState<number>(0); // index of current data
+  const [canvas, setCanvas] = useState<HTMLCanvasElement>(); // ref used to capture image
+  const [modalDisplay, setModalDisplay] = useState(false); // modal on/off control 
+
+  
 
   let canvasRef: HTMLElement | null = null;
 
@@ -29,7 +33,8 @@ function App(this: any) {
     if (isLoading === true) {
       setIsLoading(false);
       setSetNames(Object.values(WaveImageData).map(item => item.name));
-      setImages(WaveImageData[currentSet].layers)
+      setNamedLayerSet(WaveImageData[currentSet]);
+      setImages(WaveImageData[currentSet].layers);
     }
   }, [isLoading, currentSet]);
   
@@ -61,7 +66,8 @@ function App(this: any) {
   };
 
   const changeSets = (newIndex: number) => {
-    setCurrentSet(newIndex)
+    setCurrentSet(newIndex);
+    setNamedLayerSet(WaveImageData[newIndex]);
     setImages(WaveImageData[newIndex].layers)
   };
 
@@ -71,7 +77,7 @@ function App(this: any) {
       <main>
         <div id="canvas">
           <div className='img-border'>
-            <div ref={node => {if (node) canvasRef = node}}  className="img-container">
+            <div ref={node => {if (node) canvasRef = node}}  className={"img-container " + namedLayerSet?.ratioClass}>
               {images.length && images.map((i, index) => (
                 <SvgComponent layer={i} key={index} />
               ))}

@@ -7,6 +7,7 @@ export interface layer {
 
 export interface NamedLayerSet {
     name: string,
+    ratioClass: string,
     layers: layer[]
 }
 
