@@ -9,28 +9,42 @@ main {
   flex: 1 1 auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
 }
 
 #canvas {
-  height: 400px;
-  width: 400px;
-  border: 1px solid rgb(0, 0, 0) !important;
   margin: 15px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.img-border {
+  padding: 5px;
+  background-color: #1b4960;
+  border-radius: 5px;
 }
 
 .img-container {
   background-color: #f7f3f3;
   position: relative;
-  height: 400px;
-  width: 400px;
+  width: 100%;
+  /* aspect-ratio: 1920/1080; */
+  aspect-ratio: 3046 / 2052;
 }
 
 .img-container img,
 .img-container svg{
   position: absolute;
   left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.flex-pad {
+  flex: 1 0 auto;
 }
 
 .action-container {

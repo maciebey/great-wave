@@ -70,11 +70,14 @@ function App(this: any) {
       <Header></Header>
       <main>
         <div id="canvas">
-          <div ref={node => {if (node) canvasRef = node}}  className="img-container">
-            {images.length && images.map((i, index) => (
-              <SvgComponent layer={i} key={index} />
-            ))}
+          <div className='img-border'>
+            <div ref={node => {if (node) canvasRef = node}}  className="img-container">
+              {images.length && images.map((i, index) => (
+                <SvgComponent layer={i} key={index} />
+              ))}
+            </div>
           </div>
+          <div className='flex-pad' />
           <div className="action-container">
             {setNames && <select value={currentSet} onChange={(event) => changeSets(Number(event.target.value))}>
               {setNames.map((setName, index) => (

@@ -19,7 +19,7 @@ const SvgComponent = ({ layer, onChange }: Props) => {
   const filterName = `colorMask${file}`
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
         <filter id={filterName}>
           <feFlood floodColor={color} result="flood" />
