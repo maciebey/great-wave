@@ -4,29 +4,76 @@ const WaveImageData: NamedLayerSet[] = [
   {
     name: "The Great Wave - Hokusai",
     layers: [
+      // {
+      //   "name": "Background",
+      //   "file": "set5/7.svg",
+      //   "opacity": 1,
+      //   "color": "#000000"
+      // },
       {
-        "name": "Water One",
-        "file": "set3/blue_light.svg",
+        "name": "Top Sky",
+        "file": "set3/5.svg",
+        "opacity": 1,
+        "color": "#f2e7c2"
+      },
+      {
+        "name": "Gradient Sky",
+        "file": "set3/4.svg",
+        "opacity": 1,
+        "color": "#ffffff"
+      },
+      {
+        "name": "Light Water",
+        "file": "set3/3.svg",
         "opacity": 1,
         "color": "#c7efef"
       },
       {
-        "name": "Water Two",
-        "file": "set3/blue_dark.svg",
-        "opacity": 1,
-        "color": "#261a5b"
-      },
-      {
-        "name": "Water Three",
-        "file": "set3/blue_med.svg",
+        "name": "Medium Water",
+        "file": "set3/2.svg",
         "opacity": 1,
         "color": "#059faf"
       },
       {
+        "name": "Deep Water / Line",
+        "file": "set3/1.svg",
+        "opacity": 1,
+        "color": "#261a5b"
+      },
+      {
         "name": "Spray",
-        "file": "set3/splash.svg",
+        "file": "set3/6.svg",
         "opacity": 1,
         "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    name: "Rectangle Test",
+    layers: [
+      {
+        "name": "One",
+        "file": "set4/1.svg",
+        "opacity": 1,
+        "color": "#ef414e"
+      },
+      {
+        "name": "Two",
+        "file": "set4/4.svg",
+        "opacity": 1,
+        "color": "#40f294"
+      },
+      {
+        "name": "Three",
+        "file": "set4/3.svg",
+        "opacity": 1,
+        "color": "#3db7f4"
+      },
+      {
+        "name": "Four",
+        "file": "set4/2.svg",
+        "opacity": 1,
+        "color": "#af43ed"
       }
     ]
   },
