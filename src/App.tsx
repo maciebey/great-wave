@@ -87,15 +87,20 @@ function App(this: any) {
           </div>
         </div>
         <div className="control-container">
-          {images.length && images.map((i, index) => (
-            <SettingComponent
-              layer={i}
-              key={index}
-              imagePosition={index}
-              imageArrayLength={images.length}
-              onChange={(changeObject:ChangeObject) => handleChange(changeObject, index)}
-            />
-          ))}
+          <div className='control-topper'>
+            <h2 className='control-tab'>Layers</h2>
+          </div>
+          <div className="control-setting-components">
+            {images.length && images.map((i, index) => (
+              <SettingComponent
+                layer={i}
+                key={index}
+                imagePosition={index}
+                imageArrayLength={images.length}
+                onChange={(changeObject:ChangeObject) => handleChange(changeObject, index)}
+              />
+            ))}
+          </div>
         </div>
       </main>
       <Footer></Footer>
