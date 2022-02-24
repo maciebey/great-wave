@@ -5,18 +5,12 @@ import * as htmlToImage from 'html-to-image';
 import './App.css';
 
 
-/*
-https://stackoverflow.com/questions/55987953/how-do-i-update-states-onchange-in-an-array-of-object-in-react-hooks
-https://stackoverflow.com/questions/54150783/react-hooks-usestate-with-object
-https://www.carlrippon.com/react-children-with-typescript/
-https://webomnizz.com/change-parent-component-state-from-child-using-hooks-in-react/
-https://stackoverflow.com/questions/57843369/react-typescript-custom-hooks-property-prop-name-does-not-exist-on-type
-*/
-
+// TODO: component file comments
+// TODO: general cleanup of this commponent in specific, mostly for clarification purposes
 function App(this: any) {
   
   const [isLoading, setIsLoading] = useState(true); // initial load control
-  // TODO: simplify following into single useState
+  // TODO: simplify namedLayerSet & images into single useState
   const [namedLayerSet, setNamedLayerSet] = useState<NamedLayerSet>();
   const [images, setImages] = useState<layer[]>([]);
   const [setNames, setSetNames] = useState<string[]>(); // used to hold all set names, used in select
@@ -24,8 +18,7 @@ function App(this: any) {
   const [canvas, setCanvas] = useState<HTMLCanvasElement>(); // ref used to capture image
   const [modalDisplay, setModalDisplay] = useState(false); // modal on/off control 
 
-  
-
+  // element referenced used to target div for html-to-image
   let canvasRef: HTMLElement | null = null;
 
   useEffect(() => {

@@ -31,13 +31,12 @@ main {
   background-color: #f7f3f3;
   position: relative;
   width: 100%;
-  /* aspect-ratio: 1920/1080; */
-  aspect-ratio: 3046 / 2052;
 }
 
+/* Used in Image set definitions, aspect ratio needed for correct SVG behavior  */
 .ratio-1 { aspect-ratio: 1; }
-.ratio-1920-1080 { aspect-ratio: 1920 / 1080; }
-.ratio-3046-2052 { aspect-ratio: 3046 / 2052; }
+.ratio-1920-1080 { aspect-ratio: 16 / 9; }
+.ratio-3046-2052 { aspect-ratio: 1523  / 1026; }
 
 .img-container img,
 .img-container svg{
