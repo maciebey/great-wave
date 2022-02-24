@@ -1,8 +1,9 @@
 export interface layer {
     name: string,
     file: string,
-    opacity: number,
-    color: string
+    opacity?: number,
+    color: string,
+    order?: number
 };
 
 export interface NamedLayerSet {
@@ -14,5 +15,6 @@ export interface NamedLayerSet {
 export interface ChangeObject {
     type: string,
     layer?: layer,
-    direction?: string
+    direction?: string,
+    layerIndex?: number
 }

@@ -32,19 +32,26 @@ function App(this: any) {
   }, [isLoading, currentSet]);
   
   const handleChange = (changeObject: ChangeObject, index: number) => {
+    const newData: layer[] = [...images];
+
     // color/opacity
     if (changeObject.type === "layer") {
-      const newData: layer[] = [...images];
       newData[index] = changeObject.layer!;
       setImages(newData);
     }
     // position
     else {
-      const swapIndex = (changeObject.direction === "up") ? (index - 1) : (index + 1)
-      const newData: layer[] = [...images];
-      const temp = newData[index];
-      newData[index] = newData[swapIndex];
-      newData[swapIndex] = temp;
+      const incrementValue = (changeObject.direction === "up") ? 1 : -1;
+      const newOrder = newData[changeObject.layerIndex!].order! + incrementValue;
+      // find layer that already has the newOrder value and change it
+      for (let layer of newData) {
+        if (layer.order === newOrder) {
+          layer.order += -incrementValue;
+          break;
+        }
+      }
+      // change the order of the layer clicked
+      newData[changeObject.layerIndex!].order! = newOrder;
       setImages(newData);
     }
   };

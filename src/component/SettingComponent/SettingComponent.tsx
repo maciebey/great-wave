@@ -48,17 +48,17 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
     onChange(change)
   };
 
-  const positionChange = (direction: string) => {
-    const change: ChangeObject = {type: "position", direction:direction}
+  const positionChange = (direction: string, imagePosition: number) => {
+    const change: ChangeObject = {type: "position", direction:direction, layerIndex: imagePosition}
     onChange(change)
   }
 
   return (
-    <div className='control-main'>
+    <div className='control-main' style={{order: layer.order}}>
       <div className='control-header'>
         <div>Layer: {layer.name}</div>
-        <button onClick={() => positionChange("up")} className="button" disabled={imagePosition === 0}>↑</button>
-        <button onClick={() => positionChange("down")} className="button" disabled={imagePosition === imageArrayLength - 1}>↓</button>
+        <button onClick={() => positionChange("up", imagePosition)} className="button" disabled={layer.order === imageArrayLength}>↑</button>
+        <button onClick={() => positionChange("down", imagePosition)} className="button" disabled={layer.order === 1}>↓</button>
       </div>
       <div className='opacity-control'>
         <p>Opacity: {layer.opacity} </p>
