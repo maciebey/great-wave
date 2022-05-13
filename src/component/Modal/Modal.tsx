@@ -3,7 +3,8 @@ import * as htmlToImage from 'html-to-image';
 import './Modal.css';
 
 type Props = {
-  canvas: HTMLCanvasElement | undefined,
+  canvas: HTMLElement | undefined,
+  imgElement: HTMLImageElement | undefined,
   modalDisplay: boolean,
   setModalDisplay: Dispatch<React.SetStateAction<boolean>>
 };
@@ -11,13 +12,13 @@ type Props = {
 /* html-to-image guide
  * https://betterprogramming.pub/heres-why-i-m-replacing-html2canvas-with-html-to-image-in-our-react-app-d8da0b85eadf
 */
-function Modal({ canvas, modalDisplay, setModalDisplay }: Props) {
+function Modal({ canvas, imgElement, modalDisplay, setModalDisplay }: Props) {
 
   let renderRef: HTMLElement;
 
   useEffect(() => {
-    if(canvas){
-      renderRef.replaceChildren(canvas);
+    if(imgElement){
+      renderRef.replaceChildren(imgElement);
     }
   });
 

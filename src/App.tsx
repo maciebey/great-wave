@@ -15,7 +15,8 @@ function App(this: any) {
   const [images, setImages] = useState<layer[]>([]);
   const [setNames, setSetNames] = useState<string[]>(); // used to hold all set names, used in select
   const [currentSet, setCurrentSet] = useState<number>(0); // index of current data
-  const [canvas, setCanvas] = useState<HTMLCanvasElement>(); // ref used to capture image
+  const [canvas, setCanvas] = useState<HTMLElement>(); // ref used to capture image, passed to modal
+  const [imgElement, setImgElement] = useState<HTMLImageElement>(); // Image Element that is displayed in modal
   const [modalDisplay, setModalDisplay] = useState(false); // modal on/off control 
 
   // element referenced used to target div for html-to-image
@@ -58,8 +59,11 @@ function App(this: any) {
 
   const captureCanvas = () => {
     if (canvasRef) {
-      htmlToImage.toCanvas(canvasRef, {backgroundColor: "transparent"}).then(function(c) {
-        setCanvas(c)
+      setCanvas(canvasRef)
+      htmlToImage.toPng(canvasRef, {backgroundColor: "transparent"}).then( function(p) {
+        const img = new Image();
+        img.src = p;
+        setImgElement(img);
         setModalDisplay(true);
       });
     }
@@ -113,6 +117,7 @@ function App(this: any) {
       <Footer></Footer>
       <Modal
         canvas={canvas}
+        imgElement={imgElement}
         modalDisplay={modalDisplay}
         setModalDisplay={setModalDisplay} />
     </div>

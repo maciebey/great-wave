@@ -39,7 +39,13 @@
   padding: 10px;
 }
 
-#modal-canvas canvas {
+#modal-canvas {
+  max-width: 100%;
+}
+
+#modal-canvas img {
+  max-width: 100%;
+  background-color: #fff;
   border: 1px solid rgb(0, 0, 0) !important;
 }
 
