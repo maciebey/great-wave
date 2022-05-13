@@ -1,10 +1,14 @@
 import './Footer.css';
+import { Button } from '../';
 
 function Footer() {
   return (
     <footer>
-      <a href="https://www.linkedin.com/in/maciebey/">Macie Bey</a>
-      <a href="https://github.com/maciebey/great-wave">View on Github</a>
+      <a href="https://github.com/maciebey/great-wave" target="_blank">
+        <Button 
+        text="View on Github"
+        iconName="git" />
+      </a>
     </footer>
   );
 }
