@@ -1,9 +1,12 @@
 import './Header.css';
+import { Button } from '../';
 
 function Header() {
   return (
     <header>
-      <h1>great-wave</h1>
+      <div>
+        <h1>great-wave</h1>
+      </div>
     </header>
   );
 }
