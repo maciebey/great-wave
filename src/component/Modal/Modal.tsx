@@ -1,100 +1,48 @@
-import React, { Dispatch, useEffect } from 'react';
-import * as htmlToImage from 'html-to-image';
-import './Modal.css';
+import { ReactElement, useEffect, useRef } from "react";
+// import { CSSTransition } from "react-transition-group";
+import ReactPortal from "../ReactPortal";
+import "./Modal.css";
 
 type Props = {
-  canvas: HTMLElement | undefined,
-  imgElement: HTMLImageElement | undefined,
-  modalDisplay: boolean,
-  setModalDisplay: Dispatch<React.SetStateAction<boolean>>
+  children?: ReactElement,
+  isOpen?: boolean,
+  handleClose: any
 };
 
-/* html-to-image guide
- * https://betterprogramming.pub/heres-why-i-m-replacing-html2canvas-with-html-to-image-in-our-react-app-d8da0b85eadf
-*/
-function Modal({ canvas, imgElement, modalDisplay, setModalDisplay }: Props) {
-
-  let renderRef: HTMLElement;
-
+// modified from https://blog.logrocket.com/build-modal-with-react-portals/
+function Modal({ children, isOpen, handleClose }: Props) {
+  const nodeRef = useRef(null);
   useEffect(() => {
-    if(imgElement){
-      renderRef.replaceChildren(imgElement);
-    }
-  });
+    const closeOnEscapeKey = (e: any) => (e.key === "Escape" ? handleClose() : null);
+    document.body.addEventListener("keydown", closeOnEscapeKey);
+    return () => {
+      document.body.removeEventListener("keydown", closeOnEscapeKey);
+    };
+  }, [handleClose]);
 
-  const saveCanvas = (fileType: string) => {
-    // return if canvas not set correctly
-    if (!canvas) return;
-
-    let promise: Promise<string>;
-    switch (fileType) {
-      case "png":
-        promise = htmlToImage.toPng(canvas);
-        break;
-      case "jpeg":
-        promise = htmlToImage.toJpeg(canvas);
-        break;
-      default:
-        // can't proceed without promise set, so just return
-        return;
-    }
-    promise.then((dataUrl) => {
-      // TODO: file naming
-      saveAs(dataUrl, `my-node.${fileType}`);
-    })
-  }
-
-  // taken from example in top comment, maybe simplify
-  const saveAs = (blob: any, fileName: any) =>{
-    var elem = window.document.createElement('a');
-    elem.href = blob
-    elem.download = fileName;
-    // elem.style = 'display:none;';
-    (document.body || document.documentElement).appendChild(elem);
-    if (typeof elem.click === 'function') {
-      elem.click();
-    } else {
-      elem.target = '_blank';
-      elem.dispatchEvent(new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
-      }));
-    }
-    URL.revokeObjectURL(elem.href);
-    elem.remove()
-  }
-
-  // used with outside area is clicked or close button
-  const closeModal = () => {
-    setModalDisplay(false);
-  }
-
-  const outside = () => {
-    closeModal();
-  }
-
-  // just stop propigation of event, clicks inside modal must hit close button
-  const inside = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation()
-  }
+  if (!isOpen) return null;
 
   return (
-    <div className={'modal ' + (modalDisplay ? '' : 'hide')} onClick={outside}>
-      <div className='modal-content' onClick={inside}>
-        <div className='modal-header'>
-          <h2>Your New Print!</h2>
-          <button onClick={closeModal} className="close-button button">X</button>
-        </div>
-        <div className='modal-body'>
-          <div ref={node => { if (node) renderRef = node }} id="modal-canvas"></div>
-        </div>
-        <div className='modal-footer'>
-          <button onClick={() => saveCanvas("png")} className="save-button button">Save As Png</button>
-          <button onClick={() => saveCanvas("jpeg")} className="save-button button">Save As Jpeg</button>
+    <ReactPortal wrapperId="react-portal-modal-container">
+      {/* <CSSTransition
+				in={isOpen}
+				timeout={{ entry: 0, exit: 300 }}
+				unmountOnExit
+				classNames="modal"
+				nodeRef={nodeRef}
+			> */}
+      <div className="modal" ref={nodeRef}>
+        <div className="modal-content">
+          <div className='modal-header'>
+            <h2>Your New Print!</h2>
+            <button onClick={handleClose} className="close-button button">X</button>
+          </div>
+
+          {children}
         </div>
       </div>
-    </div>
+      {/* </CSSTransition> */}
+    </ReactPortal>
   );
 }
 

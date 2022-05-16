@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Header, Footer, SvgComponent, SettingComponent, Modal } from './component';
+import { Header, Footer, SvgComponent, SettingComponent, Modal, SaveModal } from './component';
 import { WaveImageData, layer, ChangeObject, NamedLayerSet } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
@@ -8,7 +8,7 @@ import './App.css';
 // TODO: component file comments
 // TODO: general cleanup of this commponent in specific, mostly for clarification purposes
 function App(this: any) {
-  
+
   const [isLoading, setIsLoading] = useState(true); // initial load control
   // TODO: simplify namedLayerSet & images into single useState
   const [namedLayerSet, setNamedLayerSet] = useState<NamedLayerSet>();
@@ -31,7 +31,7 @@ function App(this: any) {
       setImages(WaveImageData[currentSet].layers);
     }
   }, [isLoading, currentSet]);
-  
+
   const handleChange = (changeObject: ChangeObject, index: number) => {
     const newData: layer[] = [...images];
 
@@ -60,7 +60,7 @@ function App(this: any) {
   const captureCanvas = () => {
     if (canvasRef) {
       setCanvas(canvasRef)
-      htmlToImage.toPng(canvasRef, {backgroundColor: "transparent"}).then( function(p) {
+      htmlToImage.toPng(canvasRef, { backgroundColor: "transparent" }).then(function (p) {
         const img = new Image();
         img.src = p;
         setImgElement(img);
@@ -81,7 +81,7 @@ function App(this: any) {
       <main>
         <div id="canvas">
           <div className='img-border'>
-            <div ref={node => {if (node) canvasRef = node}}  className={"img-container " + namedLayerSet?.ratioClass}>
+            <div ref={node => { if (node) canvasRef = node }} className={"img-container " + namedLayerSet?.ratioClass}>
               {images.length && images.map((i, index) => (
                 <SvgComponent layer={i} key={index} />
               ))}
@@ -108,18 +108,19 @@ function App(this: any) {
                 key={index}
                 imagePosition={index}
                 imageArrayLength={images.length}
-                onChange={(changeObject:ChangeObject) => handleChange(changeObject, index)}
+                onChange={(changeObject: ChangeObject) => handleChange(changeObject, index)}
               />
             ))}
           </div>
         </div>
       </main>
       <Footer></Footer>
-      <Modal
-        canvas={canvas}
-        imgElement={imgElement}
-        modalDisplay={modalDisplay}
-        setModalDisplay={setModalDisplay} />
+      <Modal handleClose={() => setModalDisplay(false)} isOpen={modalDisplay}>
+        <SaveModal
+          canvas={canvas}
+          imgElement={imgElement}
+          setModalDisplay={setModalDisplay} />
+      </Modal>
     </div>
   );
 }
