@@ -1,6 +1,6 @@
 import React, { Dispatch, useEffect } from 'react';
 import * as htmlToImage from 'html-to-image';
-import './SaveModal.css';
+// styling in Modal.css
 
 type Props = {
   canvas: HTMLElement | undefined,

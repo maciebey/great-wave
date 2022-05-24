@@ -1,6 +1,6 @@
 import './Button.css';
 import Icon from '@mdi/react'
-import { mdiAccount, mdiInformation, mdiGithub } from '@mdi/js'
+import { mdiAccount, mdiInformation, mdiGithub, mdiLinkedin } from '@mdi/js'
 
 // using Material Design Icons: https://dev.materialdesignicons.com/
 
@@ -8,6 +8,7 @@ import { mdiAccount, mdiInformation, mdiGithub } from '@mdi/js'
 const iconReference: any = {
   "info": mdiInformation,
   "git": mdiGithub,
+  "linkedin": mdiLinkedin,
   "user": mdiAccount
 }
 
