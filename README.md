@@ -12,16 +12,19 @@ This project is currently in a working proof of concept state. Current features:
 - Live App (currently GitHub Pages)
 
 Planned features (roughly ordered from highest to lowest priority):
-- UI cleanup, including color changes, image/viewport sizes, responsiveness
-- Add info/about section
-- Replace POC images with initial set
+- UI cleanup/redesign, including color changes, image/viewport sizes, responsiveness
 - Undo/Redo of changes
-- Additional manipulation settings
-- Add additional image set(s), and create switcher
+- Better exporting, more formats and ability to set resolution size
+- Additional manipulation settings, some possibilities:
+  - color sets to choose from and apply, for user inspiration
+  - randomize colors button
+  - color gradients (replace or implement new color picker required)
+  - adding "grain" over specific layers or entire image to emulate wood printing
+- Add additional image sets, remove POC/Test images
 - Locally cache user selections, restore on reload
 - Locally save versions, restore and switch
+- Share to social media, have ability to load state based on link
 - STRETCH: export to 3rd party print service
-- Replace or implement new color picker
 
 
 
