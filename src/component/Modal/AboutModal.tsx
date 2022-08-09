@@ -7,8 +7,8 @@ Great Wave (working title) is an online vector image manipulator I was inspired
 to create after watching several videos about woodblock printing. Currently this 
 site is acting as a portfolio piece for my React/Typescript/UI/UX skills.
 `
-type Props = {};
-function AboutModal({ }: Props) {
+
+function AboutModal() {
   return (
     <div className='modal-body'>
       <div>{mainText}</div>
