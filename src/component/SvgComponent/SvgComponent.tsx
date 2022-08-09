@@ -4,17 +4,12 @@ import './SvgComponent.css';
 const iconPath = process.env.PUBLIC_URL + '/assets/';
 
 type Props = {
-  layer: layer,
-  onChange?: any
+  layer: layer
 };
 
-const SvgComponent = ({ layer, onChange }: Props) => {
-  // const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   //console.log(event.target.value)
-  //   layer.opacity = Number(event.target.value)
-  //   onChange(layer)
-  // };
-
+//TODO: want to look and see if can change this to use z-index for ordering,
+// as currently changing ordering in DOM might be rerendering intense
+const SvgComponent = ({ layer }: Props) => {
   const { file, opacity, color } = layer
   const filterName = `colorMask${file}`
 
