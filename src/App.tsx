@@ -16,7 +16,6 @@ function App(this: any) {
   const images = useAppSelector(selectArt)
   const dispatch = useAppDispatch()
 
-
   const [isLoading, setIsLoading] = useState(true); // initial load control
   // TODO: move more of this UI state into existing or new redux reducers
   const [namedLayerSet, setNamedLayerSet] = useState<NamedLayerSet>();
@@ -53,7 +52,7 @@ function App(this: any) {
   const changeSets = (newIndex: number) => {
     setCurrentSet(newIndex);
     setNamedLayerSet(WaveImageData[newIndex]);
-    dispatch(setLayers(WaveImageData[newIndex].layers));//setImages(WaveImageData[newIndex].layers)
+    dispatch(setLayers(WaveImageData[newIndex].layers));
   };
 
   return (
