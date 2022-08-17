@@ -46,8 +46,8 @@ function App(this: any) {
 
     // color/opacity
     if (changeObject.type === "layer") {
-      newData[index] = changeObject.layer!;
-      dispatch(setLayers(WaveImageData[currentSet].layers))//setImages(newData);
+      // newData[index] = changeObject.layer!;
+      // dispatch(setSingleLayer( {index: index, layer: changeObject.layer} ))//setImages(newData);
     }
     // position
     else {

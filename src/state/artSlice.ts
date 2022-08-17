@@ -1,15 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
 
-import { layer } from '../config'
+import { layer, ChangeObject } from '../config'
 
-// Define a type for the slice state
 interface ArtState {
   // setNames: string[],
   images: layer[]
 }
 
-// Define the initial state using that type
 const initialState: ArtState = {
   // setNames: Object.values(WaveImageData).map(item => item.name),
   images: []
@@ -17,26 +15,26 @@ const initialState: ArtState = {
 
 export const artSlice = createSlice({
   name: 'art',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
+    // TODO: organize these methods better, if we have a bunch of "noHistory"
+    // versions want to not reuse code over and over
+    // TODO: fix PayloadAction type, issues when trying to use ChangeObject
+    setSingleLayerOpacity: (state, action: PayloadAction<any>) => {
+      let {index, opacity} = action.payload
+      state.images[index].opacity = opacity
+    },
+    setSingleLayerOpacityNoHistory: (state, action: PayloadAction<any>) => {
+      let {index, opacity} = action.payload
+      state.images[index].opacity = opacity
+    },
     setLayers: (state, action: PayloadAction<layer[]>) => {
       state.images = action.payload
     }
-    // increment: (state) => {
-    //   state.value += 1
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1
-    // },
-    // // Use the PayloadAction type to declare the contents of `action.payload`
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload
-    // },
   },
 })
 
-export const { setLayers } = artSlice.actions
+export const { setSingleLayerOpacity, setSingleLayerOpacityNoHistory, setLayers } = artSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectArt = (state: RootState) => state.art.present.images

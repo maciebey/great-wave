@@ -3,6 +3,9 @@ import { layer, ChangeObject } from '../../config';
 import { ChromePicker } from 'react-color';
 import './SettingComponent.css';
 
+import { useAppSelector, useAppDispatch } from '../../state/hooks'
+import { setSingleLayerOpacity, setSingleLayerOpacityNoHistory } from '../../state/artSlice'
+
 type PickerProps = {
   layer: layer,
   onChange?: any
@@ -41,11 +44,13 @@ type Props = {
 };
 
 const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: Props) => {
+  const dispatch = useAppDispatch()
 
-  const opacityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const change: ChangeObject = {type: "layer", layer:layer}
-    change.layer!.opacity = Number(event.target.value)
-    onChange(change)
+  const opacityChangeNoHist = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSingleLayerOpacityNoHistory( {index: imagePosition, opacity: Number(event.target.value)} ))
+  };
+  const opacityChange = (event: React.MouseEvent<HTMLInputElement>, layerOp: any) => {
+    dispatch(setSingleLayerOpacity( {index: imagePosition, opacity: layerOp} ))
   };
 
   const positionChange = (direction: string, imagePosition: number) => {
@@ -67,8 +72,9 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
           type="range"
           min="0" max="1"
           value={layer.opacity}
-          onChange={(event) => opacityChange(event)}
+          onChange={(event) => opacityChangeNoHist(event)}
           step=".01"
+          onMouseUp={(event) => opacityChange(event, layer.opacity)}
         />
       </div>
       <div className='color-control'>
