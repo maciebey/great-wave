@@ -4,16 +4,16 @@ Inspired by the techniques used to create wood print art such as the iconic piec
 
 Live on Github Pages: https://maciebey.github.io/great-wave/
 
-Tech: React, Typescript
+Tech: React, Typescript, Redux
 
 This project is currently in a working proof of concept state. Current features:
 - Independently modify image layers (opacity/color picker/layer order)
+- Undo/Redo of modifications via redux-undo
 - Flatten and export as PNG/JPG file
 - Live App (currently GitHub Pages)
 
 Planned features (roughly ordered from highest to lowest priority):
 - UI cleanup/redesign, including color changes, image/viewport sizes, responsiveness
-- Undo/Redo of changes
 - Better exporting, more formats and ability to set resolution size
 - Additional manipulation settings, some possibilities:
   - color sets to choose from and apply, for user inspiration
