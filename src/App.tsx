@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Header, Footer, SvgComponent, SettingComponent, Modal, SaveModal } from './component';
-import { WaveImageData, layer, ChangeObject, NamedLayerSet } from './config'
+import { WaveImageData, NamedLayerSet } from './config'
 import * as htmlToImage from 'html-to-image';
 import './App.css';
 
+// Redux
+import { useAppSelector, useAppDispatch } from './state/hooks'
+import { setLayers, selectArt } from './state/artSlice'
+import { ActionCreators } from 'redux-undo';
 
 // TODO: component file comments
 // TODO: general cleanup of this commponent in specific, mostly for clarification purposes
 function App(this: any) {
+  // Redux State
+  const images = useAppSelector(selectArt)
+  const dispatch = useAppDispatch()
 
   const [isLoading, setIsLoading] = useState(true); // initial load control
-  // TODO: simplify namedLayerSet & images into single useState
+  // TODO: move more of this UI state into existing or new redux reducers
   const [namedLayerSet, setNamedLayerSet] = useState<NamedLayerSet>();
-  const [images, setImages] = useState<layer[]>([]);
   const [setNames, setSetNames] = useState<string[]>(); // used to hold all set names, used in select
   const [currentSet, setCurrentSet] = useState<number>(0); // index of current data
   const [canvas, setCanvas] = useState<HTMLElement>(); // ref used to capture image, passed to modal
@@ -28,34 +34,8 @@ function App(this: any) {
       setIsLoading(false);
       setSetNames(Object.values(WaveImageData).map(item => item.name));
       setNamedLayerSet(WaveImageData[currentSet]);
-      setImages(WaveImageData[currentSet].layers);
     }
   }, [isLoading, currentSet]);
-
-  const handleChange = (changeObject: ChangeObject, index: number) => {
-    const newData: layer[] = [...images];
-
-    // color/opacity
-    if (changeObject.type === "layer") {
-      newData[index] = changeObject.layer!;
-      setImages(newData);
-    }
-    // position
-    else {
-      const incrementValue = (changeObject.direction === "up") ? 1 : -1;
-      const newOrder = newData[changeObject.layerIndex!].order! + incrementValue;
-      // find layer that already has the newOrder value and change it
-      for (let layer of newData) {
-        if (layer.order === newOrder) {
-          layer.order += -incrementValue;
-          break;
-        }
-      }
-      // change the order of the layer clicked
-      newData[changeObject.layerIndex!].order! = newOrder;
-      setImages(newData);
-    }
-  };
 
   const captureCanvas = () => {
     if (canvasRef) {
@@ -72,7 +52,7 @@ function App(this: any) {
   const changeSets = (newIndex: number) => {
     setCurrentSet(newIndex);
     setNamedLayerSet(WaveImageData[newIndex]);
-    setImages(WaveImageData[newIndex].layers)
+    dispatch(setLayers(WaveImageData[newIndex].layers));
   };
 
   return (
@@ -100,6 +80,9 @@ function App(this: any) {
         <div className="control-container">
           <div className='control-topper'>
             <h2 className='control-tab'>Layers</h2>
+            <div className='spacer'></div>
+            <button onClick={()=>dispatch(ActionCreators.undo())}>Undo</button>
+            <button onClick={()=>dispatch(ActionCreators.redo())}>Redo</button>
           </div>
           <div className="control-setting-components">
             {images.length && images.map((i, index) => (
@@ -108,7 +91,6 @@ function App(this: any) {
                 key={index}
                 imagePosition={index}
                 imageArrayLength={images.length}
-                onChange={(changeObject: ChangeObject) => handleChange(changeObject, index)}
               />
             ))}
           </div>
