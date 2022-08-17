@@ -7,6 +7,7 @@ import './App.css';
 // Redux
 import { useAppSelector, useAppDispatch } from './state/hooks'
 import { setLayers, selectArt } from './state/artSlice'
+import { ActionCreators } from 'redux-undo';
 
 // TODO: component file comments
 // TODO: general cleanup of this commponent in specific, mostly for clarification purposes
@@ -80,6 +81,9 @@ function App(this: any) {
         <div className="control-container">
           <div className='control-topper'>
             <h2 className='control-tab'>Layers</h2>
+            <div className='spacer'></div>
+            <button onClick={()=>dispatch(ActionCreators.undo())}>Undo</button>
+            <button onClick={()=>dispatch(ActionCreators.redo())}>Redo</button>
           </div>
           <div className="control-setting-components">
             {images.length && images.map((i, index) => (

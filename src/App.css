@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 main {
   flex: 1 1 auto;
   display: flex;
@@ -67,6 +71,10 @@ main {
 .control-topper {
   display: flex;
   justify-content: space-between;
+}
+
+.control-topper button:first-of-type {
+  margin-right: 10px;
 }
 
 .control-tab {
