@@ -3,23 +3,18 @@ import { layer, ChangeObject } from '../../config';
 import { ChromePicker } from 'react-color';
 import './SettingComponent.css';
 
-import { useAppSelector, useAppDispatch } from '../../state/hooks'
-import { setSingleLayerOpacity, setSingleLayerOpacityNoHistory } from '../../state/artSlice'
+import { useAppDispatch } from '../../state/hooks'
+import { modifyLayer, modifyLayerNoHist } from '../../state/artSlice'
 
 type PickerProps = {
   layer: layer,
-  onChange?: any
+  tChange: any,
+  cChange: any
 };
 
 // TODO: latest version of react-color bugged, replace or upgrade https://github.com/casesandberg/react-color/issues/837
-const ColorPickerButton = ({layer, onChange}:PickerProps) => {
+const ColorPickerButton = ({layer, tChange, cChange}:PickerProps) => {
   const [displayPicker, setDisplayPicker] = useState(false);
-
-  const colorChange = (c: any, event: React.ChangeEvent<HTMLInputElement>) => {
-    const change: ChangeObject = {type: "layer", layer:layer}
-    change.layer!.color = c.hex
-    onChange(change)
-  };
 
   return (
     <div>
@@ -28,7 +23,8 @@ const ColorPickerButton = ({layer, onChange}:PickerProps) => {
         <div className='picker-cover' onClick={ () => setDisplayPicker(false) } />
         <ChromePicker
           color={layer.color}
-          onChange={ colorChange }
+          onChange={ (color) => tChange(color.hex) }
+          onChangeComplete={(color) => cChange(color.hex)}
           disableAlpha={true}
         />
       </div>}
@@ -39,31 +35,24 @@ const ColorPickerButton = ({layer, onChange}:PickerProps) => {
 type Props = {
   layer: layer,
   imagePosition: number,
-  imageArrayLength: number,
-  onChange?: any
+  imageArrayLength: number
 };
 
-const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: Props) => {
+const SettingComponent = ({ layer, imagePosition, imageArrayLength }: Props) => {
   const dispatch = useAppDispatch()
-
-  const opacityChangeNoHist = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSingleLayerOpacityNoHistory( {index: imagePosition, opacity: Number(event.target.value)} ))
-  };
-  const opacityChange = (event: React.MouseEvent<HTMLInputElement>, layerOp: any) => {
-    dispatch(setSingleLayerOpacity( {index: imagePosition, opacity: layerOp} ))
-  };
-
-  const positionChange = (direction: string, imagePosition: number) => {
-    const change: ChangeObject = {type: "position", direction:direction, layerIndex: imagePosition}
-    onChange(change)
-  }
+  const transientChange = (co:ChangeObject) => {dispatch(modifyLayerNoHist( co ))}
+  const completedChange = (co:ChangeObject) => {dispatch(modifyLayer( co ))}
 
   return (
     <div className='control-main' style={{order: layer.order}}>
       <div className='control-header'>
         <div>Layer: {layer.name}</div>
-        <button onClick={() => positionChange("up", imagePosition)} className="button" disabled={layer.order === imageArrayLength}>↑</button>
-        <button onClick={() => positionChange("down", imagePosition)} className="button" disabled={layer.order === 1}>↓</button>
+        <button onClick={() => completedChange({layerIndex: imagePosition, positionChange:1})}
+          className="button"
+          disabled={layer.order === imageArrayLength}>↑</button>
+        <button onClick={() => completedChange({layerIndex: imagePosition, positionChange:-1})}
+          className="button"
+          disabled={layer.order === 1}>↓</button>
       </div>
       <div className='opacity-control'>
         <p>Opacity: {layer.opacity} </p>
@@ -72,9 +61,9 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
           type="range"
           min="0" max="1"
           value={layer.opacity}
-          onChange={(event) => opacityChangeNoHist(event)}
+          onChange={(event) => transientChange({layerIndex: imagePosition, opacity: Number(event.target.value)})}
           step=".01"
-          onMouseUp={(event) => opacityChange(event, layer.opacity)}
+          onMouseUp={() => completedChange({layerIndex: imagePosition, opacity: Number(layer.opacity)})}
         />
       </div>
       <div className='color-control'>
@@ -82,7 +71,8 @@ const SettingComponent = ({ layer, imagePosition, imageArrayLength, onChange }: 
         <div className='color-display' style={{ backgroundColor: layer.color }}></div>
         <ColorPickerButton
           layer={layer}
-          onChange={(change:ChangeObject) => onChange(change)}
+          tChange={(color: string)=>transientChange({layerIndex: imagePosition, color: color})}
+          cChange={(color: string)=>completedChange({layerIndex: imagePosition, color: color})}
         />
       </div>
     </div>

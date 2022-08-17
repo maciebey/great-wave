@@ -1,40 +1,54 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from './store'
 
-import { layer, ChangeObject } from '../config'
+import { WaveImageData, layer, ChangeObject } from '../config'
 
+// modify layer method, defined here because reused between history and no history versions
+const layerModify = (state: any, action: PayloadAction<ChangeObject>) => {
+  const { layerIndex, color, opacity, positionChange } = action.payload
+  if (opacity) {
+    state.images[layerIndex].opacity = opacity
+  }
+  if (color) {
+    state.images[layerIndex].color = color
+  }
+  if (positionChange) {
+    const newOrder = state.images[layerIndex].order + positionChange;
+    // find layer that already has the newOrder value and change it
+    for (let layer of state.images) {
+      if (layer.order === newOrder) {
+        layer.order += -positionChange;
+        break;
+      }
+    }
+    // change the order of the layer clicked
+    state.images[layerIndex].order = newOrder;
+  }
+}
+
+// https://react-redux.js.org/tutorials/typescript-quick-start
 interface ArtState {
-  // setNames: string[],
   images: layer[]
 }
 
 const initialState: ArtState = {
-  // setNames: Object.values(WaveImageData).map(item => item.name),
-  images: []
+  // TODO: loading of initial state from cache or based on encoded url
+  images: WaveImageData[0].layers
 }
 
 export const artSlice = createSlice({
   name: 'art',
   initialState,
   reducers: {
-    // TODO: organize these methods better, if we have a bunch of "noHistory"
-    // versions want to not reuse code over and over
-    // TODO: fix PayloadAction type, issues when trying to use ChangeObject
-    setSingleLayerOpacity: (state, action: PayloadAction<any>) => {
-      let {index, opacity} = action.payload
-      state.images[index].opacity = opacity
-    },
-    setSingleLayerOpacityNoHistory: (state, action: PayloadAction<any>) => {
-      let {index, opacity} = action.payload
-      state.images[index].opacity = opacity
-    },
+    modifyLayer: layerModify,
+    modifyLayerNoHist: layerModify,
     setLayers: (state, action: PayloadAction<layer[]>) => {
       state.images = action.payload
     }
   },
 })
 
-export const { setSingleLayerOpacity, setSingleLayerOpacityNoHistory, setLayers } = artSlice.actions
+export const { modifyLayer, modifyLayerNoHist, setLayers } = artSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectArt = (state: RootState) => state.art.present.images

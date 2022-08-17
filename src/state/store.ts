@@ -4,9 +4,14 @@ import undoable, { excludeAction }from 'redux-undo'
 import counterReducer from './counterSlice'
 import artReducer from './artSlice'
 
+// array of reducer actions we don't want to apply to history
+const noHistoryActions = [
+  'art/modifyLayerNoHist',
+]
+
 const rootReducer = combineReducers({
   counter: undoable(counterReducer),
-  art: undoable(artReducer, {filter: excludeAction(['art/setSingleLayerOpacityNoHistory'])})
+  art: undoable(artReducer, {filter: excludeAction(noHistoryActions)})
 })
 
 const store = configureStore({

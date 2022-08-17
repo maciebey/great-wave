@@ -13,8 +13,8 @@ export interface NamedLayerSet {
 }
 
 export interface ChangeObject {
-    type: string,
-    layer?: layer,
-    direction?: string,
-    layerIndex?: number
+    layerIndex: number,
+    positionChange?: number,
+    opacity?: number,
+    color?: string
 }
