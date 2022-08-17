@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import undoable, { excludeAction }from 'redux-undo'
-import counterReducer from './counterSlice'
 import artReducer from './artSlice'
 
 // array of reducer actions we don't want to apply to history
@@ -10,7 +9,6 @@ const noHistoryActions = [
 ]
 
 const rootReducer = combineReducers({
-  counter: undoable(counterReducer),
   art: undoable(artReducer, {filter: excludeAction(noHistoryActions)})
 })
 
